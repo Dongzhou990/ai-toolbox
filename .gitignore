@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.env
+*.db
+data/
+uploads/
+outputs/
+.DS_Store
+*.log
+chroma_db/
+.npm/
