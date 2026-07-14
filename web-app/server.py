@@ -60,7 +60,7 @@ async def kb_upload(kb_id: int, file: UploadFile = File(...), user=Header(None))
     (d / file.filename).write_bytes(await file.read())
     text = load_file(str(d / file.filename))
     chunks = chunk_text(text, 500)
-    store = VectorStore(); store.create_collection("kb_"+str(kb_id))
+    store = VectorStore(mode="semantic"); store.create_collection("kb_"+str(kb_id))
     store.add_documents(chunks, [{"source":file.filename,"chunk":i,"kb_id":kb_id} for i in range(len(chunks))])
     kb_stores[kb_id] = store
     return {"status":"ok","filename":file.filename,"chunks":len(chunks),"chars":len(text)}
